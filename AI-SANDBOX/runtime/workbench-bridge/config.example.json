@@ -1,0 +1,12 @@
+{
+  "host": "127.0.0.1",
+  "port": 48173,
+  "token": "CHANGE_ME_LOCAL_TOKEN",
+  "workspace": ".",
+  "allowedCommands": {
+    "status": ["git", "status", "--short"],
+    "test": ["npm", "test"],
+    "lint": ["npm", "run", "lint"],
+    "build": ["npm", "run", "build"]
+  }
+}
