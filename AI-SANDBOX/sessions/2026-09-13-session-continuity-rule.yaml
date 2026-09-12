@@ -1,0 +1,41 @@
+session:
+  id: 2026-09-13-session-continuity-rule
+  timestamp: 2026-09-13
+anchor: AI-SANDBOX/skills/conversation-distillation/SKILL.md
+state: "GitHub 外部知识底座必须承担跨对话连续状态保存职责。"
+objective: "确保每次对话结束后都有可恢复的 Session State 写入 GitHub，避免依赖单一聊天窗口记忆。"
+completed:
+  - "已建立 AI-SANDBOX/README.md。"
+  - "已建立 conversation-distillation Skill。"
+  - "已检查现有 Skill，并发现此前缺少‘每次对话必须写入’这一硬性触发规则。"
+decisions:
+  - "每次对话都必须生成可恢复的 Session State，并写入 GitHub。"
+  - "每次写入使用独立版本记录，不覆盖历史。"
+  - "记录至少包含 anchor、state、objective、completed、decisions、constraints、open_items、next_action、evidence、source、version。"
+  - "对话恢复优先读取 GitHub 最新 Anchor / Session State。"
+  - "GitHub 负责持久化与版本控制，实际执行仍由独立 runtime / 本地工作台完成。"
+constraints:
+  - "不能把整段聊天原样作为长期记忆。"
+  - "不能把推断写成确认事实。"
+  - "不能覆盖历史记录。"
+  - "不能因为第三方连接器不可用而让连续工作链断裂。"
+  - "GitHub 本身不是代码执行沙箱。"
+open_items:
+  - "将‘每次对话必须写入 GitHub’正式加入 conversation-distillation Skill 的硬性规则。"
+  - "建立固定的 session 文件命名与最新状态索引机制。"
+  - "建立自动化的对话结束蒸馏与写回机制。"
+next_action: "更新 conversation-distillation Skill，补充每次对话强制写回、失败保护、session ID、最新状态索引和恢复优先级。"
+evidence:
+  confirmed:
+    - "当前仓库为 shen-jian-hun/-lumi-OS。"
+    - "AI-SANDBOX/README.md 与 AI-SANDBOX/skills/conversation-distillation/SKILL.md 已存在。"
+  inference:
+    - "仅有 Skill 描述而没有强制写回规则，存在跨会话状态遗漏风险。"
+  hypothesis:
+    - "通过固定 Session State + Latest Index 可以显著降低连续工作状态丢失。"
+  pending:
+    - "验证自动化写回能否覆盖每次实际对话结束事件。"
+source:
+  conversation: "当前会话"
+  github: "AI-SANDBOX/skills/conversation-distillation/SKILL.md"
+version: "1.0"
