@@ -1,0 +1,44 @@
+session_id: 2026-09-13-session-001
+status: completed
+anchor: conversation-persistence-github
+state: GitHub 外部知识底座已被确定为每次对话的持久化恢复层。
+objective: 确保跨对话不会因为聊天上下文消失而丢失工作状态。
+completed:
+  - 检查 AI-SANDBOX 现有延续对话蒸馏 Skill。
+  - 确认原 Skill 缺少每次对话强制写回 GitHub 的硬规则。
+  - 将每次对话必须产生 Session State、唯一 session_id、历史保留、LATEST 恢复索引、写入失败保护等规则写入 SKILL.md。
+  - 创建 AI-SANDBOX/LATEST.yaml 作为最新恢复入口。
+  - 创建本次 Session State。
+decisions:
+  - 每次对话必须写入 GitHub，不再把持久化视为可选动作。
+  - 新 Session 独立保存，不覆盖历史。
+  - LATEST.yaml 只负责指向最新成功写入的 Session。
+  - GitHub 写入失败时必须显式标记 pending_write 或 recovery_required。
+constraints:
+  - 不得在未成功写入 GitHub 时声称已经保存。
+  - 不得把整段聊天原样作为长期记忆。
+  - 不得把推断伪装成确认事实。
+  - 不得覆盖旧 Session。
+open_items:
+  - 建立真正自动触发的本地 Workbench Bridge，使对话蒸馏与 GitHub 写回可以自动执行。
+  - 进一步实现 Session ID 自动生成、LATEST 自动更新和失败补写队列。
+next_action: 构建 AI-SANDBOX/runtime/workbench-bridge，将 GitHub 持久化协议连接到本地工作台。
+evidence:
+  confirmed:
+    - AI-SANDBOX/skills/conversation-distillation/SKILL.md 已更新。
+    - AI-SANDBOX/LATEST.yaml 已创建。
+    - 本 Session 文件已创建。
+  inference:
+    - 自动化 Bridge 将减少因人工遗漏造成的持久化缺口。
+  hypothesis:
+    - 本地工作台连接后可形成 AI → GitHub → 本地工作台 → GitHub → AI 的闭环。
+  pending:
+    - 自动 Bridge 的实际本地运行和故障恢复仍需实现与验证。
+source:
+  conversation: 2026-09-13 当前会话
+  github:
+    - AI-SANDBOX/skills/conversation-distillation/SKILL.md
+    - AI-SANDBOX/LATEST.yaml
+    - AI-SANDBOX/sessions/2026-09-13-session-001.yaml
+timestamp: 2026-09-13
+version: 1.0
