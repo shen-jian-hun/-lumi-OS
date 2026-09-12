@@ -26,3 +26,4 @@ $null
 agent_shutdown_snapshot_*
 LumiOS_个人版_部署服务方案.pdf
 lumi_output/
+AI-SANDBOX/runtime/workbench-bridge/config.json
