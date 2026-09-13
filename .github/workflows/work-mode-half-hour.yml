@@ -1,0 +1,73 @@
+name: LumiOS Work Mode Heartbeat
+
+on:
+  schedule:
+    # Every 30 minutes, deliberately offset from the top of the hour.
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  work-mode-heartbeat:
+    name: Work Mode self-check heartbeat
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Inspect project state
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p AI-SANDBOX/heartbeat
+          NOW="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
+          SHA="$(git rev-parse HEAD)"
+          {
+            echo "# Work Mode Heartbeat"
+            echo
+            echo "- timestamp: $NOW"
+            echo "- commit: $SHA"
+            echo "- branch: main"
+            echo
+            echo "## Current objective"
+            echo "持续把 LumiOS 推向真正可工作的 Work Mode。"
+            echo
+            echo "## Core question"
+            echo "现在距离真正的 Work 模式还缺什么？"
+            echo
+            echo "## Recent commits"
+            git log -5 --pretty='- %h %s (%ci)' || true
+            echo
+            echo "## Open Call Android"
+            test -f apps/open-call-android/app/src/main/java/com/lumios/opencall/MainActivity.kt && echo "- MainActivity: present" || echo "- MainActivity: missing"
+            test -f apps/open-call-android/app/build.gradle.kts && echo "- Android build config: present" || echo "- Android build config: missing"
+            echo
+            echo "## Workbench Bridge"
+            test -f AI-SANDBOX/runtime/workbench-bridge/bridge.mjs && echo "- bridge.mjs: present" || echo "- bridge.mjs: missing"
+            test -f AI-SANDBOX/runtime/workbench-bridge/openclaw/work-mode.json && echo "- OpenClaw adapter contract: present" || echo "- OpenClaw adapter contract: missing"
+            echo
+            echo "## Policy"
+            echo "- GitHub-first project knowledge"
+            echo "- Open-source-first implementation"
+            echo "- No bypass of login, subscription, quota, or security controls"
+            echo "- No arbitrary shell commands from task payloads"
+            echo
+            echo "## Next iteration"
+            echo "Use the current repository state to select the highest-value unfinished Work Mode module."
+          } > "AI-SANDBOX/heartbeat/latest.md"
+
+      - name: Commit heartbeat state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add AI-SANDBOX/heartbeat/latest.md
+          if git diff --cached --quiet; then
+            echo "No heartbeat change to commit."
+            exit 0
+          fi
+          git commit -m "chore: update Work Mode heartbeat"
+          git push
