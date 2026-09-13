@@ -1,0 +1,28 @@
+task_id: work-mode-hourly-self-check
+schedule: hourly
+status: ready
+objective: "持续把 LumiOS 推向真正可工作的 Work Mode"
+core_question: "现在距离真正的 Work 模式还缺什么？"
+checks:
+  - "读取 GitHub 当前项目状态与最近变更"
+  - "识别未完成、阻塞和风险项"
+  - "优先检查 Open Call Android、Workbench Bridge、GitHub task/result loop、OpenClaw adapter"
+  - "只选择一个最高价值的下一步迭代任务"
+  - "结果写回 GitHub，保留历史，不覆盖既有 Session State"
+policy:
+  source_priority: "GitHub-first"
+  open_source_first: true
+  paid_dependency_by_default: false
+  no_bypass_of_service_limits: true
+  no_arbitrary_shell_from_task_payload: true
+  user_account_permissions: "use only normally authorized capabilities"
+output:
+  required:
+    - current_state
+    - completed_since_last_check
+    - blockers
+    - work_mode_gap
+    - next_iteration
+    - evidence
+    - timestamp
+  writeback: "AI-SANDBOX/sessions/ and AI-SANDBOX/LATEST.yaml"
