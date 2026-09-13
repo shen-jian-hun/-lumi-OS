@@ -1,0 +1,37 @@
+version: 1.0
+name: experimental-confidentiality-principle
+status: active
+anchor: verify-before-disclose
+
+principle: "未验证成功的 LumiOS / AI-SANDBOX 实验成果，默认作为内部研究资料处理，不主动对外推广。"
+
+reasoning:
+  - "实验阶段的方案可能包含未经验证的假设、接口设计和工程路径。"
+  - "过早传播可能造成误解、错误复用、错误预期或安全风险。"
+  - "先完成闭环、验证稳定性，再决定是否公开，更符合工程研发节奏。"
+
+scope:
+  protected_by_default:
+    - "LumiOS 内部架构"
+    - "AI-SANDBOX 工作流与锚点机制"
+    - "Open Call / Plugin / Bridge 集成设计"
+    - "Workbench Bridge 与 OpenClaw 接入方案"
+    - "尚未验证的实验结论"
+    - "内部 Task、Session State、研究记录"
+
+open_source_boundary:
+  rule: "使用外部开源项目与公开源码，不等于公开本项目自身的实验成果。"
+  requirement: "外部源码仅按其公开许可证和授权范围使用。"
+
+release_gate:
+  required_before_publication:
+    - "功能闭环完成"
+    - "关键路径经过实际验证"
+    - "稳定性与安全边界经过检查"
+    - "失败模式与限制已经记录"
+    - "确认具备可复制性或明确的发布价值"
+    - "由项目所有者决定是否公开"
+
+working_rule: "先藏锋，后验证；先闭环，后公开。"
+
+privacy_note: "本原则记录项目工作策略，不替代 GitHub 仓库自身的 private/public 权限设置。仓库访问权限必须由实际仓库设置控制。"
