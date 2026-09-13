@@ -1,0 +1,34 @@
+task_id: work-mode-half-hour-self-check
+schedule: every_30_minutes
+status: ready
+objective: "持续把 LumiOS 推向真正可工作的 Work Mode"
+core_question: "现在距离真正的 Work 模式还缺什么？"
+checks:
+  - "读取 GitHub 当前项目状态与最近变更"
+  - "识别未完成、阻塞和风险项"
+  - "优先检查 Open Call Android、Workbench Bridge、GitHub task/result loop、OpenClaw adapter"
+  - "优先寻找公开源码和开源组件"
+  - "只选择一个最高价值的下一步迭代任务"
+  - "结果写回 GitHub，保留历史，不覆盖既有 Session State"
+policy:
+  source_priority: "GitHub-first"
+  open_source_first: true
+  paid_dependency_by_default: false
+  no_bypass_of_service_limits: true
+  no_arbitrary_shell_from_task_payload: true
+  user_account_permissions: "use only normally authorized capabilities"
+execution:
+  scheduler: "GitHub Actions"
+  cron: "7,37 * * * *"
+  timezone: "UTC"
+  note: "Runs every 30 minutes at minute 7 and 37, deliberately offset from the top of the hour."
+output:
+  required:
+    - current_state
+    - completed_since_last_check
+    - blockers
+    - work_mode_gap
+    - next_iteration
+    - evidence
+    - timestamp
+  writeback: "AI-SANDBOX/heartbeat/latest.md and AI-SANDBOX/sessions/ when a substantive AI iteration occurs"
