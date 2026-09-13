@@ -1,0 +1,20 @@
+{
+  "name": "lumi-work-mode",
+  "status": "adapter-defined",
+  "agent": "openclaw",
+  "stateStore": "github",
+  "executionBoundary": "workbench-bridge",
+  "operations": [
+    "work.status",
+    "work.start",
+    "work.run_task",
+    "work.stop",
+    "work.result"
+  ],
+  "policy": {
+    "allowlistedCommandsOnly": true,
+    "noArbitraryShellFromTaskPayload": true,
+    "credentialsStayLocal": true
+  },
+  "next": "wire OpenClaw Gateway into the local Workbench Bridge"
+}
