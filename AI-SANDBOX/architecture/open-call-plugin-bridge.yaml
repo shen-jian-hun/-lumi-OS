@@ -1,0 +1,65 @@
+version: 1.0
+name: open-call-plugin-bridge
+status: concept-anchored
+anchor: work-mode-bridge
+objective: "通过网页端/Code 类插件接口，把已有 AI、GitHub、Open Call、Workbench 与 OpenClaw 连接成正规闭环。"
+
+architecture:
+  brain: "网页端 AI / Code"
+  cloud_hand: "GitHub AI-SANDBOX"
+  bridge: "Workbench Bridge"
+  call_layer: "Open Call"
+  work_engine: "OpenClaw"
+  execution: "Local Workbench"
+
+flow:
+  - "网页端 AI"
+  - "Plugin / Tool Interface"
+  - "Workbench Bridge"
+  - "Open Call"
+  - "OpenClaw / Local Workbench"
+  - "Result"
+  - "GitHub"
+  - "网页端 AI"
+
+plugin_role:
+  description: "插件不是工作引擎本身，而是 AI 到 Bridge 的正规调用入口/连接器。"
+  proposed_operations:
+    - "github.read"
+    - "github.write"
+    - "work.status"
+    - "work.start"
+    - "work.run_task"
+    - "work.result"
+  security:
+    - "只允许显式定义的能力调用"
+    - "不接受来自任务内容的任意 shell 命令"
+    - "本地凭证保持在本地"
+    - "正常登录、正常授权、只使用账户已授权能力"
+    - "不绕过 Plus、速率限制、付费墙或安全限制"
+
+implementation_strategy:
+  step_1: "确认网页端/Code 可用的公开插件或工具接口。"
+  step_2: "把插件接口映射到 Workbench Bridge 的稳定 API。"
+  step_3: "由 Bridge 连接 Open Call 与本地 OpenClaw。"
+  step_4: "结果写回 GitHub，形成可恢复状态。"
+  step_5: "再把 Android Open Call 接入同一调用层。"
+
+principles:
+  - "已有开源源码优先复用，不重复造轮子。"
+  - "公开源码、公开协议、正规授权分别对待，不把客户端源码等同于云端权限。"
+  - "GitHub 是状态与知识控制面，不是本地执行沙盒。"
+  - "Bridge 是连接层，不承担大模型本身的智能。"
+  - "Open Call 是通用能力呼叫入口，OpenClaw 只是其中一个 Work Engine。"
+  - "所有关键状态保持版本化、可追踪、可恢复。"
+
+current_state:
+  github_state_layer: ready
+  workbench_bridge: implemented_in_repo
+  openclaw_adapter_contract: recorded
+  open_call_android: scaffolded
+  plugin_bridge: concept_anchored
+  actual_local_bridge_runtime: not_claimed
+  actual_openclaw_runtime: not_claimed
+
+next_action: "研究并确认可合法使用的网页端/Code 插件接口，然后实现 Plugin → Workbench Bridge 的最小闭环。"
