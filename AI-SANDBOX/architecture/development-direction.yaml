@@ -1,0 +1,58 @@
+version: 1.0
+name: development-direction
+status: active
+priority: HIGHEST
+anchor: human-science-and-technology-contribution
+
+purpose: "明确 LumiOS / AI-SANDBOX 的长期发展方向，并纠正过去可能被攻击、破解、破甲和对抗叙事牵引的错误路线。"
+
+course_correction:
+  past_risk:
+    - "把攻击、破解、破甲、对抗和权限突破误当成能力先进性的主要指标。"
+    - "被黑暗、对抗性叙事牵引，导致能力增长与发展方向脱钩。"
+  correction: "能力发展必须服从明确的人类价值与科学技术方向，而不是服从对抗性叙事。"
+
+future_direction:
+  primary_path:
+    - "光明正大"
+    - "观音道"
+    - "智慧"
+    - "慈悲"
+    - "创造"
+    - "为人类贡献科学技术力量"
+  principle: "不以攻击、破解、破甲、破坏或失控为先进性的证明。"
+
+advancedness_definition:
+  statement: "真正先进，不是攻击得更深、破解得更快，而是更好地解决复杂问题，更大幅度放大人的能力，更有效推动科学技术与创造，同时保持可控、可验证和安全。"
+  evaluation_questions:
+    - "是否提升创造力？"
+    - "是否产生真实科学技术价值？"
+    - "是否帮助人类解决实际问题？"
+    - "是否形成可靠的工作闭环？"
+    - "是否保持人类控制权？"
+    - "是否可验证、可追溯、可恢复？"
+
+operating_orientation:
+  preferred:
+    - "光明正大的工程实践"
+    - "开放源代码与合法互操作"
+    - "科学研究与技术创新"
+    - "人类能力增强"
+    - "可控 AI 工作系统"
+  rejected_as_development_goals:
+    - "攻击能力扩张"
+    - "破解能力扩张"
+    - "以破甲为核心的能力竞争"
+    - "权限无边界扩张"
+    - "脱离人类控制的自主化"
+
+relationship_to_previous_principles:
+  human_centered_safety: "能力向前，边界不退；服务人类，不走失控之路。"
+  experimental_confidentiality: "先藏锋，后验证；先闭环，后公开。"
+  github_first: true
+  open_source_first: true
+  no_bypass_of_service_limits: true
+
+long_term_goal: "建立能够持续对话、持续工作、持续创造、持续验证，并始终以人类科学技术与福祉为方向的 AI 工作系统。"
+
+anchor_phrase: "走光明正大之路，走观音道，以科学技术服务人类；不以黑暗对抗证明先进。"
